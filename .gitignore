@@ -35,3 +35,15 @@
 
 # Rails credentials key
 /config/credentials/*.key
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Terraform variable files (secrets)
+*.tfvars
+
+# Ignore plan files
+*.tfplan
