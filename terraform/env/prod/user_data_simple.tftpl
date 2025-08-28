@@ -1,3 +1,4 @@
+# Simple Nginx server for testing
 #!/bin/bash
 dnf -y update
 dnf -y install nginx postgresql16
@@ -13,3 +14,8 @@ server {
 NGX
 systemctl enable nginx
 systemctl restart nginx
+
+cd /home/ec2-user || exit 1
+echo "RAILS_MASTER_KEY=${rails_master_key}" > .env
+echo "DATABASE_URL=${database_url}"       >> .env
+chmod 600 .env

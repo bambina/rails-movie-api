@@ -40,6 +40,17 @@ data "aws_ami" "al2023" {
   }
 }
 
+locals {
+  database_url = format(
+    "postgres://%s:%s@%s:%d/%s",
+    var.db_username,
+    var.db_password,
+    aws_db_instance.rds_postgres.address,
+    aws_db_instance.rds_postgres.port,
+    var.db_name
+  )
+}
+
 # EC2 Instance
 resource "aws_instance" "app" {
   ami                         = data.aws_ami.al2023.id
@@ -50,7 +61,10 @@ resource "aws_instance" "app" {
   key_name                    = var.ec2_key_name
 
   # User data script executed at instance launch
-  user_data = file("${path.module}/user_data.sh")
+  user_data = templatefile("${path.module}/user_data.tftpl", {
+    rails_master_key = var.rails_master_key,
+    database_url     = local.database_url
+  })
 
   # Root EBS volume configuration
   root_block_device {

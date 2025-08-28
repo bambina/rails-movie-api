@@ -39,16 +39,16 @@ test:
 production:
   primary:
     <<: *default
-    url: <%= Rails.application.credentials.database_url %>
+    url: <%= ENV["DATABASE_URL"] %>
   cable:
     <<: *default
-    url: <%= Rails.application.credentials.database_url %>
+    url: <%= ENV["DATABASE_URL"] %>
   queue:
     <<: *default
-    url: <%= Rails.application.credentials.database_url %>
+    url: <%= ENV["DATABASE_URL"] %>
   cache:
     <<: *default
-    url: <%= Rails.application.credentials.database_url %>
+    url: <%= ENV["DATABASE_URL"] %>
 
 # production:
 #   primary: &primary_production

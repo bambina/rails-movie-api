@@ -1,0 +1,39 @@
+#!/bin/bash
+set -euxo pipefail
+
+VER="v2.39.2"
+COMPOSE_DST="/usr/local/lib/docker/cli-plugins/docker-compose"
+
+# Basic tools installation
+dnf update -y
+dnf install -y docker git postgresql16
+
+# Start Docker and enable auto-start
+systemctl enable docker
+systemctl start docker
+
+# Add ec2-user to docker group (takes effect on next login)
+usermod -aG docker ec2-user
+
+# Install Docker Compose v2 (CLI plugin) to system-wide path
+mkdir -p "$(dirname "$COMPOSE_DST")"
+curl -fL "https://github.com/docker/compose/releases/download/$${VER}/docker-compose-linux-x86_64" -o "$COMPOSE_DST"
+chmod +x "$COMPOSE_DST"
+
+mkdir -p /home/ec2-user
+cd /home/ec2-user
+# Clone the Rails application repository
+git clone https://github.com/bambina/rails-movie-api.git app
+cd app
+# Set ownership of Rails directories to user ID 1000
+chown -R 1000:1000 log storage tmp
+
+# Set env vars
+cat > .env <<EOF
+RAILS_MASTER_KEY=${rails_master_key}
+DATABASE_URL=${database_url}
+EOF
+chmod 600 .env
+
+# Start the application
+docker compose -f docker-compose.prod.yml up -d --build

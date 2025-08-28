@@ -9,6 +9,10 @@ variable "environment" {
   type    = string
   default = "prod"
 }
+variable "rails_master_key" {
+  type      = string
+  sensitive = true
+}
 
 # AWS Configuration
 variable "region" { default = "ap-northeast-1" }
