@@ -1,18 +1,26 @@
 #### TODO:
 - ✅ Model test
-- Implement API
+- ✅ OpenAPI doc (swagger)
+- Implement APIs
+  - User, ✅ Movie, Watchlist
 - JWT auth
-- OpenAPI doc (swagger)
+- ✅ Provision infra with Terraform
+- Push Docker images to ECR (image registry)
+- Use Auto Scaling Group (ASG)
+
 
 # Rails Movie API
 
 A RESTful movie API with OpenAPI and JWT auth.
+
+Demo is available at: [https://rails-movie-api.bambi-dev.net/api-docs/index.html](https://rails-movie-api.bambi-dev.net/api-docs/index.html) (secured with Basic Auth)
 
 ## Tech Stack
 
 - Ruby 3.3.8 / Rails 8.0.2
 - PostgreSQL 16.9
 - Docker 28.3.2 / Docker Compose v2.38.2
+- Terraform 1.13.x (IaC for AWS resources)
 
 ---
 
@@ -50,7 +58,7 @@ bundle exec rspec
 
 ## 📘 API Documentation
 
-**Swagger UI**: http://localhost:3000/api-docs
+**Swagger UI**: http://localhost:3000/api-docs/index.html
 
 ### Quick Update
 1. Edit `spec/requests/api/v1/docs/*_spec.rb`
@@ -131,6 +139,16 @@ erDiagram
 ### Constraints
 - `(user_id, movie_id)` combination must be unique in Watchlists
 
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+    Internet -->|"HTTPS (ACM)"| ALB[ALB_public]
+    ALB -->|HTTP| EC2[EC2_private]
+    EC2 -->|HTTP| RDS[(RDS_private)]
+```
 
 ---
 
