@@ -2,8 +2,7 @@
 - ✅ Model test
 - ✅ OpenAPI doc (swagger)
 - Implement APIs
-  - User, ✅ Movie, Watchlist
-- JWT auth
+  - ✅ Movie, Watchlist, Auth
 - ✅ Provision infra with Terraform
 - Push Docker images to ECR (image registry)
 - Use Auto Scaling Group (ASG)
@@ -34,8 +33,6 @@ The API documentation is available via Swagger UI:
 - Docker 28.3.2 / Docker Compose v2.38.2
 - Terraform 1.13.x (IaC for AWS resources)
 
----
-
 ## 🚀 Setup Instructions
 
 ### 🐳 Using Docker
@@ -54,8 +51,6 @@ bin/rails db:prepare # (db:create + db:migrate + db:seed)
 bin/rails server
 ```
 
----
-
 ## ✅ Testing
 
 ```bash
@@ -65,8 +60,6 @@ docker compose run --rm test
 # Local Development
 bundle exec rspec
 ```
-
----
 
 ## 📘 API Documentation
 
@@ -79,8 +72,6 @@ bundle exec rspec
 ### Test Files
 - `docs/*_spec.rb` - Swagger generation
 - `*_spec.rb` - Detailed API tests
-
----
 
 ## API Endpoints
 
@@ -112,8 +103,6 @@ bundle exec rspec
 | POST   | /auth/login      | Issue JWT upon login        |
 | POST   | /auth/refresh    | Refresh access token        |
 
-
----
 
 ## Database Schema
 
@@ -150,8 +139,6 @@ erDiagram
 
 ### Constraints
 - `(user_id, movie_id)` combination must be unique in Watchlists
-
----
 
 ## Architecture
 

@@ -11,8 +11,9 @@ Rails.application.routes.draw do
       # RESTful routes for movies (excluding HTML views)
       resources :movies, except: [ :new, :edit ]
 
-      # Authentication route for user login
+      # Authentication
       post "auth/login", to: "auth#login"
+      post "auth/refresh", to: "auth#refresh"
     end
   end
 

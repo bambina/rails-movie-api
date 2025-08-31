@@ -36,6 +36,11 @@ RSpec.configure do |config|
             scheme: :bearer,
             bearerFormat: :JWT,
             description: 'Enter your JWT token (no "Bearer " prefix).'
+          },
+          cookieAuth: {
+            type: :apiKey,
+            in: :cookie,
+            name: 'refresh_token'
           }
         },
         schemas: {

@@ -70,7 +70,7 @@ module ApiSchemas
       }
     end
 
-    def self.auth_login_response
+    def self.auth_response
       {
         type: :object,
         properties: {
