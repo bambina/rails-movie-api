@@ -23,7 +23,7 @@ end
 
 # Create sample users
 puts "Creating users..."
-%w[user1 user2 user3].each { |u| User.create!(username: u, password: "111") }
+%w[user1 user2 user3].each { |u| User.create!(username: u, password: "123456") }
 puts "Created #{User.count} users"
 
 # Create sample movies

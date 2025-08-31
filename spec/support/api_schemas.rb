@@ -64,7 +64,7 @@ module ApiSchemas
         type: :object,
         properties: {
           username: { type: :string, example: 'user1' },
-          password: { type: :string, example: '111' }
+          password: { type: :string, example: '123456' }
         },
         required: %w[username password]
       }
