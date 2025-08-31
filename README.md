@@ -11,11 +11,23 @@
 
 # Rails Movie API
 
-A RESTful movie API with OpenAPI and JWT auth.
+[![CI](https://github.com/bambina/rails-movie-api/actions/workflows/ci.yml/badge.svg)](https://github.com/bambina/rails-movie-api/actions/workflows/ci.yml)
+![Ruby](https://img.shields.io/badge/Ruby-3.3.8-red)
+![Rails](https://img.shields.io/badge/Rails-8.0.2-crimson)
+![Postgres](https://img.shields.io/badge/Postgres-16-blue)
+![Docker](https://img.shields.io/badge/Docker-✓-blue)
+![Swagger](https://img.shields.io/badge/Swagger-API%20Docs-brightgreen)
+![Terraform](https://img.shields.io/badge/Terraform-Infrastructure-623CE4)
 
-Demo is available at: [https://rails-movie-api.bambi-dev.net/api-docs/index.html](https://rails-movie-api.bambi-dev.net/api-docs/index.html) (secured with Basic Auth)
+Rails-based RESTful API for managing movies, built with JWT authentication, RSpec testing, and Dockerized for deployment.
+Infrastructure is provisioned with Terraform and deployed on AWS.
 
-## Tech Stack
+## 🌐 Demo
+The API documentation is available via Swagger UI:
+🔗 [rails-movie-api.bambi-dev.net/api-docs](https://rails-movie-api.bambi-dev.net/api-docs/index.html)
+(access protected with Basic Auth)
+
+## 🛠 Tech Stack
 
 - Ruby 3.3.8 / Rails 8.0.2
 - PostgreSQL 16.9
@@ -149,28 +161,3 @@ flowchart TD
     ALB -->|HTTP| EC2[EC2_private]
     EC2 -->|HTTP| RDS[(RDS_private)]
 ```
-
----
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
