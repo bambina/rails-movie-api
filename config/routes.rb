@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       # RESTful routes for movies (excluding HTML views)
       resources :movies, except: [ :new, :edit ]
+
+      # Authentication route for user login
+      post "auth/login", to: "auth#login"
     end
   end
 

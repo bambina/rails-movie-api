@@ -31,8 +31,11 @@ RSpec.describe 'api/v1/movies', type: :request do
       description 'Create a new movie'
       consumes 'application/json'
       produces 'application/json'
+      security [ { bearerAuth: [] } ]
 
       parameter name: :movie, in: :body, required: true, schema: ApiSchemas::V1.movie_request
+
+      include_context 'with authenticated user'
 
       response 201, 'Created' do
         schema ApiSchemas::V1.movie_response
@@ -88,8 +91,11 @@ RSpec.describe 'api/v1/movies', type: :request do
       tags 'Movies'
       description 'Delete a specific movie by ID'
       produces 'application/json'
+      security [ { bearerAuth: [] } ]
 
       parameter name: :id, in: :path, type: :integer, description: 'Movie ID'
+
+      include_context 'with authenticated user'
 
       response 204, 'Movie deleted successfully' do
         let(:movie) { create(:movie) }
@@ -116,9 +122,12 @@ RSpec.describe 'api/v1/movies', type: :request do
       description 'Partially update movie information'
       consumes 'application/json'
       produces 'application/json'
+      security [ { bearerAuth: [] } ]
 
       parameter name: :id, in: :path, type: :integer, description: 'Movie ID'
       parameter name: :movie, in: :body, required: true, schema: ApiSchemas::V1.movie_patch_request
+
+      include_context 'with authenticated user'
 
       response 200, 'Movie updated successfully' do
         schema ApiSchemas::V1.movie_response
@@ -156,9 +165,12 @@ RSpec.describe 'api/v1/movies', type: :request do
       description 'Fully update movie information'
       consumes 'application/json'
       produces 'application/json'
+      security [ { bearerAuth: [] } ]
 
       parameter name: :id, in: :path, type: :integer, description: 'Movie ID'
       parameter name: :movie, in: :body, required: true, schema: ApiSchemas::V1.movie_request
+
+      include_context 'with authenticated user'
 
       response 200, 'Movie updated successfully' do
         schema ApiSchemas::V1.movie_response

@@ -30,6 +30,14 @@ RSpec.configure do |config|
         }
       ],
       components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: :JWT,
+            description: 'Enter your JWT token (no "Bearer " prefix).'
+          }
+        },
         schemas: {
           movie: {
             type: :object,

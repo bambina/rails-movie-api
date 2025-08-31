@@ -5,6 +5,73 @@ info:
   version: v1
   description: A REST API for managing movies and watchlists with JWT authentication
 paths:
+  "/api/v1/auth/login":
+    post:
+      summary: Login
+      tags:
+      - Auth
+      description: Authenticate user and get JWT
+      parameters: []
+      responses:
+        '200':
+          description: successful login
+          content:
+            application/json:
+              example:
+                token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3NTY2MTAyOTZ9.k5K5S7MYJZbn8DCtoJ8HnnRyHCyTv49Icv8ps3Tgs1I
+                token_type: Bearer
+                expires_in: 3600
+                username: user_1
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUz...
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                  username:
+                    type: string
+                    example: user1
+                required:
+                - token
+                - token_type
+                - expires_in
+                - username
+        '401':
+          description: invalid credentials
+          content:
+            application/json:
+              example:
+                error: Invalid username or password
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid username or password
+                required:
+                - error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: user1
+                password:
+                  type: string
+                  example: '111'
+              required:
+              - username
+              - password
+        required: true
   "/api/v1/movies":
     get:
       summary: List movies
@@ -25,14 +92,14 @@ paths:
                   title: Movie 1
                   description: A great movie about something interesting.
                   release_year: 2001
-                  created_at: '2025-08-25T00:34:12.087Z'
-                  updated_at: '2025-08-25T00:34:12.087Z'
+                  created_at: '2025-08-31T02:18:16.188Z'
+                  updated_at: '2025-08-31T02:18:16.188Z'
                 - id: 2
                   title: Movie 2
                   description: A great movie about something interesting.
                   release_year: 2002
-                  created_at: '2025-08-25T00:34:12.089Z'
-                  updated_at: '2025-08-25T00:34:12.089Z'
+                  created_at: '2025-08-31T02:18:16.189Z'
+                  updated_at: '2025-08-31T02:18:16.189Z'
                 meta:
                   current_page: 1
                   total_pages: 3
@@ -73,6 +140,8 @@ paths:
       tags:
       - Movies
       description: Create a new movie
+      security:
+      - bearerAuth: []
       parameters: []
       responses:
         '201':
@@ -85,8 +154,8 @@ paths:
                   title: Movie 6
                   description: A great movie about something interesting.
                   release_year: 2006
-                  created_at: '2025-08-25T00:34:12.135Z'
-                  updated_at: '2025-08-25T00:34:12.135Z'
+                  created_at: '2025-08-31T02:18:16.202Z'
+                  updated_at: '2025-08-31T02:18:16.202Z'
               schema:
                 type: object
                 properties:
@@ -179,8 +248,8 @@ paths:
                   title: Movie 7
                   description: A great movie about something interesting.
                   release_year: 2007
-                  created_at: '2025-08-25T00:34:12.141Z'
-                  updated_at: '2025-08-25T00:34:12.141Z'
+                  created_at: '2025-08-31T02:18:16.210Z'
+                  updated_at: '2025-08-31T02:18:16.210Z'
               schema:
                 type: object
                 properties:
@@ -231,6 +300,8 @@ paths:
       tags:
       - Movies
       description: Delete a specific movie by ID
+      security:
+      - bearerAuth: []
       parameters:
       - name: id
         in: path
@@ -284,6 +355,8 @@ paths:
       tags:
       - Movies
       description: Partially update movie information
+      security:
+      - bearerAuth: []
       parameters:
       - name: id
         in: path
@@ -302,8 +375,8 @@ paths:
                   release_year: 2009
                   id: 9
                   description: A great movie about something interesting.
-                  created_at: '2025-08-25T00:34:12.162Z'
-                  updated_at: '2025-08-25T00:34:12.164Z'
+                  created_at: '2025-08-31T02:18:16.244Z'
+                  updated_at: '2025-08-31T02:18:16.248Z'
               schema:
                 type: object
                 properties:
@@ -395,6 +468,8 @@ paths:
       tags:
       - Movies
       description: Fully update movie information
+      security:
+      - bearerAuth: []
       parameters:
       - name: id
         in: path
@@ -413,8 +488,8 @@ paths:
                   description: Updated description
                   release_year: 2011
                   id: 11
-                  created_at: '2025-08-25T00:34:12.170Z'
-                  updated_at: '2025-08-25T00:34:12.171Z'
+                  created_at: '2025-08-31T02:18:16.262Z'
+                  updated_at: '2025-08-31T02:18:16.266Z'
               schema:
                 type: object
                 properties:
@@ -507,6 +582,12 @@ servers:
 - url: "/"
   description: Default server (works for both dev and prod)
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Enter your JWT token (no "Bearer " prefix).
   schemas:
     movie:
       type: object

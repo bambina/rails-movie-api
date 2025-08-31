@@ -59,6 +59,30 @@ module ApiSchemas
       }
     end
 
+    def self.auth_login_request
+      {
+        type: :object,
+        properties: {
+          username: { type: :string, example: 'user1' },
+          password: { type: :string, example: '111' }
+        },
+        required: %w[username password]
+      }
+    end
+
+    def self.auth_login_response
+      {
+        type: :object,
+        properties: {
+          token:      { type: :string, example: 'eyJhbGciOiJIUz...' },
+          token_type: { type: :string, example: 'Bearer' },
+          expires_in: { type: :integer, example: 3600 },
+          username:   { type: :string, example: 'user1' }
+        },
+        required: %w[token token_type expires_in username]
+      }
+    end
+
     def self.internal_server_error
       {
         type: :object,
@@ -104,6 +128,16 @@ module ApiSchemas
           }
         },
         required: [ 'error' ]
+      }
+    end
+
+    def self.unauthorized_error
+      {
+        type: :object,
+        properties: {
+          error: { type: :string, example: 'Invalid username or password' }
+        },
+        required: %w[error]
       }
     end
   end

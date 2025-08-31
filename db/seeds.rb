@@ -23,14 +23,8 @@ end
 
 # Create sample users
 puts "Creating users..."
-users_data = [
-  { username: "user1", password_digest: BCrypt::Password.create("111") },
-  { username: "user2", password_digest: BCrypt::Password.create("111") },
-  { username: "user3", password_digest: BCrypt::Password.create("111") }
-]
-User.insert_all(users_data)
-users = User.all.to_a
-puts "Created #{users.count} users"
+%w[user1 user2 user3].each { |u| User.create!(username: u, password: "111") }
+puts "Created #{User.count} users"
 
 # Create sample movies
 puts "Creating movies..."

@@ -1,5 +1,6 @@
 class Api::V1::MoviesController < Api::BaseController
   before_action :set_movie, only: [ :show, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :create, :update, :destroy ]
 
   def index
     @movies = Movie.page(params[:page]).per(params[:per_page])
