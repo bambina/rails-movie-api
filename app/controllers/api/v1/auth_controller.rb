@@ -1,5 +1,4 @@
 class Api::V1::AuthController < Api::BaseController
-
   # Authenticates a user with username and password
   def login
     user = User.find_by(username: params[:username].to_s.downcase.strip)
