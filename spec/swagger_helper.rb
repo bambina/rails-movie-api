@@ -20,7 +20,7 @@ RSpec.configure do |config|
       info: {
         title: 'Movie API',
         version: 'v1',
-        description: 'A REST API for managing movies and watchlists with JWT authentication'
+        description: "A REST API for managing movies and watchlists with JWT authentication.\n\n👉 [View on GitHub](https://github.com/bambina/rails-movie-api)"
       },
       paths: {},
       servers: [

@@ -1,13 +1,3 @@
-#### TODO:
-- ✅ Model test
-- ✅ OpenAPI doc (swagger)
-- Implement APIs
-  - ✅ Movie, Watchlist, Auth
-- ✅ Provision infra with Terraform
-- Push Docker images to ECR (image registry)
-- Use Auto Scaling Group (ASG)
-
-
 # Rails Movie API
 
 [![CI](https://github.com/bambina/rails-movie-api/actions/workflows/ci.yml/badge.svg)](https://github.com/bambina/rails-movie-api/actions/workflows/ci.yml)
@@ -41,6 +31,7 @@ The API documentation is available via Swagger UI:
 git clone <repository-url>
 cd <repository-name>
 docker compose up
+# The API will be available at http://localhost:3000/api-docs
 ```
 
 ### 💻 Local Development
@@ -148,3 +139,14 @@ flowchart TD
     ALB -->|HTTP| EC2[EC2_private]
     EC2 -->|HTTP| RDS[(RDS_private)]
 ```
+
+## TODO:
+- ✅ Model test
+- ✅ OpenAPI doc (swagger)
+- Implement APIs
+  - Watchlist
+- Use ES256 instead of HS256
+- Use jti for refresh token rotation/revocation
+- ✅ Provision infra with Terraform
+- Push Docker images to ECR (image registry)
+- Use Auto Scaling Group (ASG)
